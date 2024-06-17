@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Response\JsonResponse;
+use App\Response\Status;
 use OpenApi\Attributes as OA;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -19,8 +20,9 @@ class StatusController
         description: 'Returns the current timestamp',
         content: new OA\JsonContent()
     )]
+    #[OA\Tag(name: 'Status checks')]
     public function checkServerIsUp(): JsonResponse
     {
-        return new JsonResponse([], 'success');
+        return new JsonResponse([], Status::SUCCESS);
     }
 }
