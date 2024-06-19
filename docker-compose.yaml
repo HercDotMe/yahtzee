@@ -3,6 +3,8 @@ services:
   api:
     container_name: api
     build: docker/api
+    environment:
+      DATABASE_URL: "mysql://yahtzee:password@database:3306/yahtzee?serverVersion=8.0.32&charset=utf8mb4"
     ports:
       - '8080:80'
     volumes:
