@@ -5,14 +5,13 @@ namespace App\Controller;
 use App\Response\JsonResponse;
 use App\Response\Status;
 use OpenApi\Attributes as OA;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
-class StatusController
+class StatusController extends AbstractController
 {
     /**
-     * List the rewards of the specified user.
-     *
-     * This call takes into account all confirmed awards, but not pending or refused awards.
+     * Returns the current timestamp
      */
     #[Route('/api/ping', methods: ['GET'])]
     #[OA\Response(
