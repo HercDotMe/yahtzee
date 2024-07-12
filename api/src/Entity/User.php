@@ -32,15 +32,6 @@ class User extends Timestampable
     #[Column(type: "string", length: 255, nullable: false)]
     private string $password;
 
-    #[Groups(["create", "update"])]
-    #[Assert\NotBlank(groups: ["create"])]
-    #[OA\Property(type: 'string', maxLength: 255)]
-    private ?string $passwordRepeat;
-
-    #[Groups(["read"])]
-    #[Column(type: "string", length: 255, nullable: false, columnDefinition: "ENUM('ok', 'locked', 'banned')")]
-    private UserStatus $status;
-
     public function getId(): int
     {
         return $this->id;
@@ -65,28 +56,6 @@ class User extends Timestampable
     public function setPassword(string $password): User
     {
         $this->password = $password;
-        return $this;
-    }
-
-    public function getPasswordRepeat(): ?string
-    {
-        return $this->passwordRepeat;
-    }
-
-    public function setPasswordRepeat(string $passwordRepeat): User
-    {
-        $this->passwordRepeat = $passwordRepeat;
-        return $this;
-    }
-
-    public function getStatus(): UserStatus
-    {
-        return $this->status;
-    }
-
-    public function setStatus(UserStatus $status): User
-    {
-        $this->status = $status;
         return $this;
     }
 }
