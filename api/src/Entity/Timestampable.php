@@ -11,13 +11,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
 #[MappedSuperclass]
 class Timestampable
 {
-    #[Groups(["read"])]
-    #[OA\Property(type: 'datetime')]
+    #[OA\Property(type: 'string')]
     #[Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected DateTime $createdAt;
 
-    #[Groups(["read"])]
-    #[OA\Property(type: 'datetime')]
+    #[OA\Property(type: 'string')]
     #[Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected DateTime $updatedAt;
 
