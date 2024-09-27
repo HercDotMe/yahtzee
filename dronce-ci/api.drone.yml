@@ -2,11 +2,22 @@ kind: pipeline
 name: default
 
 steps:
-  - name: install
+  - name: install-app
     image: composer
     commands:
       - cd api
       - composer install
+
+  - name: install-tools
+    image: composer
+    commands:
+      - cd tools/php-cs-fixer
+      - composer install
+
+  - name: php-cs-fixer
+    image: php:8
+    commands:
+      - php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff api/src
 
   - name: php-unit
     image: php:8
