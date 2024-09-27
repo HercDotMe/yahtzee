@@ -11,9 +11,9 @@ steps:
   - name: php-unit
     image: php:8
     commands:
-      - api/bin/phpunit api/tests/unit/
+      - php api/bin/phpunit api/tests/unit/
 
   - name: php-spec
     image: php:8
     commands:
-      - api/bin/phpspec run
+      - php api/bin/phpspec run
