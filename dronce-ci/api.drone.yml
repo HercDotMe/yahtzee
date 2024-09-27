@@ -42,13 +42,15 @@ steps:
 
   - name: build
     image: plugins/docker
-    repo: vladerc/yahtzee-api
     settings:
       username:
         from_secret: DOCKER_USER
       password:
         from_secret: DOCKER_PASS
-      tags: ${DRONE_COMMIT}
+      repo: vladerc/yahtzee-api
+      tags:
+        - 'latest'
+        - v${DRONE_BUILD_NUMBER}
       dockerfile: docker/api/Dockerfile
     depends_on:
       - php-cs-fixer
