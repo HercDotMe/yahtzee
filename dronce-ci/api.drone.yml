@@ -48,8 +48,7 @@ steps:
         from_secret: DOCKER_USER
       password:
         from_secret: DOCKER_PASS
-      tags:
-        - latest
+      tags: ${DRONE_COMMIT}
       dockerfile: docker/api/Dockerfile
     depends_on:
       - php-cs-fixer
