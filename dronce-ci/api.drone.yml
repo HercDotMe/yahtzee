@@ -43,6 +43,14 @@ steps:
   - name: build
     image: plugins/docker
     repo: vladerc/yahtzee-api
+    settings:
+      username:
+        from_secret: DOCKER_USER
+      password:
+        from_secret: DOCKER_PASS
+      tags:
+        - latest
+      dockerfile: docker/api/Dockerfile
     depends_on:
       - php-cs-fixer
       - php-unit
