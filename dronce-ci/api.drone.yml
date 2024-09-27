@@ -43,4 +43,8 @@ steps:
   - name: build
     image: plugins/docker
     repo: vladerc/yahtzee-api
+    depends_on:
+      - php-cs-fixer
+      - php-unit
+      - php-spec
 
