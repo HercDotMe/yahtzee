@@ -41,7 +41,9 @@ steps:
       - install-app
       - install-tools
     when:
-      event: push
+      event:
+        - push
+        - custom
 
   - name: php-spec
     image: php:8
