@@ -39,3 +39,8 @@ steps:
     depends_on:
       - install-app
       - install-tools
+
+  - name: build
+    image: plugins/docker
+    repo: vladerc/yahtzee-api
+
