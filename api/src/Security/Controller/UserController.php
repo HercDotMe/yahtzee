@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Controller;
+namespace App\Security\Controller;
 
 use App\DTO\UserCreate;
 use App\DTO\UserUpdate;
-use App\Entity\User;
+use App\Security\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Attributes as OA;

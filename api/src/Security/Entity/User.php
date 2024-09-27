@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Entity;
+namespace App\Security\Entity;
 
 use Doctrine\ORM\Mapping\Column;
 use Doctrine\ORM\Mapping\Entity;
@@ -15,11 +15,11 @@ class User extends Timestampable
     #[Id, Column(type: "integer"), GeneratedValue(strategy: "IDENTITY")]
     private ?int $id;
 
-    #[OA\Property(type: "string")]
+    #[OA\Property(type: "string", maxLength: 255)]
     #[Column(type: "string", length: 255, unique: true, nullable: false)]
     private string $email;
 
-    #[OA\Property(type: "string", writeOnly: true)]
+    #[OA\Property(type: "string", maxLength: 255, writeOnly: true)]
     #[Column(type: "string", length: 255, nullable: false)]
     private string $password;
 
