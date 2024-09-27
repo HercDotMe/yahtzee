@@ -13,18 +13,29 @@ steps:
     commands:
       - cd tools/php-cs-fixer
       - composer install
+    depends_on:
+      - install-app
 
   - name: php-cs-fixer
     image: php:8
     commands:
       - php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff api/src
+    depends_on:
+      - install-app
+      - install-tools
 
   - name: php-unit
     image: php:8
     commands:
       - php api/bin/phpunit api/tests/unit/
+    depends_on:
+      - install-app
+      - install-tools
 
   - name: php-spec
     image: php:8
     commands:
       - php api/bin/phpspec run
+    depends_on:
+      - install-app
+      - install-tools
