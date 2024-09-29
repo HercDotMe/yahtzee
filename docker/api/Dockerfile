@@ -1,5 +1,5 @@
 # Install app dependencies
-FROM composer/composer:latest as app_install
+FROM composer/composer:latest AS app_install
 
 COPY api /app
 WORKDIR /app
