@@ -77,3 +77,20 @@ steps:
       event:
         - push
         - custom
+
+  - name: build-tag
+    image: plugins/docker
+    settings:
+      username:
+        from_secret: DOCKER_USER
+      password:
+        from_secret: DOCKER_PASS
+      repo: vladerc/yahtzee-api
+      tags:
+        - "latest"
+        - "${DRONE_TAG}"
+      dockerfile: docker/api/Dockerfile
+    depends_on:
+      - install-app
+    when:
+      event: tag
