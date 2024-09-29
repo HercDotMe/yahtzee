@@ -22,3 +22,14 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Security\Service\Login\FacebookProvider:
+        arguments:
+            $clientId: '%env(string:FACEBOOK_APP_ID)%'
+            $clientSecret: '%env(string:FACEBOOK_APP_SECRET)%'
+            $redirectUri: '%env(string:LOGIN_REDIRECT_URI)%'
+
+    App\Security\Controller\BridgeController:
+        arguments:
+            $loginProviders:
+                - '@App\Security\Service\Login\FacebookProvider'

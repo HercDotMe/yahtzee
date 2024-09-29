@@ -1,10 +1,10 @@
 nelmio_api_doc:
-    documentation:
-        info:
-            title: Yahtzee API
-            description: An API that allows for Yahtzee games
-            version: 1.0.0
     areas: # to filter documented areas
-        disable_default_routes: true
-        path_patterns:
-            - ^/api(?!/doc$) # Accepts routes under /api except /api/doc
+        default:
+            path_patterns:
+                - ^/api/v1/
+            documentation:
+                info:
+                    title: Yahtzee Default API
+                    description: An API that allows for Yahtzee games
+                    version: 1.0.0

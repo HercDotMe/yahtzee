@@ -1,5 +1,8 @@
-controllers:
+security_routes:
     resource:
         path: ../src/Security/Controller/
         namespace: App\Security\Controller
     type: attribute
+    prefix: api/v1/security
+    name_prefix: 'api_v1_security_'
+    trailing_slash_on_root: false
