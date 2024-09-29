@@ -26,7 +26,6 @@ steps:
     commands:
       - php tools/php-cs-fixer/vendor/bin/php-cs-fixer fix --dry-run --diff api/src
     depends_on:
-      - install-app
       - install-tools
     when:
       event:
@@ -38,7 +37,6 @@ steps:
     commands:
       - php api/bin/phpunit api/tests/unit/
     depends_on:
-      - install-app
       - install-tools
     when:
       event:
@@ -50,7 +48,6 @@ steps:
     commands:
       - php api/bin/phpspec run
     depends_on:
-      - install-app
       - install-tools
     when:
       event:
