@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
 
 #[ORM\Entity]
-#[ORM\Index(columns: ['token_value', 'provider_name'])]
+#[ORM\Index(columns: ['provider_user_id', 'provider_name'])]
 class UserProvider extends Timestampable
 {
     #[OA\Property(type: 'integer', readOnly: true)]
