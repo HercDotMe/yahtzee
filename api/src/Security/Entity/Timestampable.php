@@ -9,11 +9,11 @@ use OpenApi\Attributes as OA;
 #[ORM\MappedSuperclass]
 class Timestampable
 {
-    #[OA\Property(type: 'string', readOnly: true)]
+    #[OA\Property(type: 'string', format: 'date-time', readOnly: true)]
     #[ORM\Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected DateTime $createdAt;
 
-    #[OA\Property(type: 'string', readOnly: true)]
+    #[OA\Property(type: 'string', format: 'date-time', readOnly: true)]
     #[ORM\Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected DateTime $updatedAt;
 

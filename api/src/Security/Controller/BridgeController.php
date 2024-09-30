@@ -2,8 +2,10 @@
 
 namespace App\Security\Controller;
 
+use App\Security\Entity\User;
 use App\Security\Service\Login\LoginProvider;
 use App\Security\Service\UserManager;
+use Nelmio\ApiDocBundle\Annotation\Model;
 use OpenApi\Attributes\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -11,6 +13,8 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use OpenApi\Attributes as OA;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[Tag('Security')]
 class BridgeController extends AbstractController
@@ -37,8 +41,24 @@ class BridgeController extends AbstractController
     }
 
     #[Route('authorise/{providerName}', name: 'authorise', methods: ['GET'])]
-    public function authenticate(string $providerName): Response
-    {
+    #[OA\Response(
+        response: 302,
+        description: "Redirects to the provider's authorization page"
+    )]
+    #[OA\Parameter(
+        name: 'providerName',
+        description: 'Name of the provider to use',
+        in: 'path',
+        required: true,
+        allowEmptyValue: false,
+        schema: new OA\Schema(
+            type: 'string',
+            enum: ['facebook', 'twitter', 'google', 'outlook']
+        )
+    )]
+    public function authenticate(
+        string $providerName
+    ): Response {
         if (isset($this->loginProviders[$providerName])) {
             $callbackURL = $this->generateUrl('api_v1_security_callback', ['providerName' => $providerName]);
             return new RedirectResponse($this->loginProviders[$providerName]->getRedirectUrl($callbackURL));
@@ -48,6 +68,22 @@ class BridgeController extends AbstractController
     }
 
     #[Route('callback/{providerName}', name: 'callback', methods: ['GET'])]
+    #[OA\Response(
+        response: 200,
+        description: "Returns the user associated with the new social provider",
+        content: new Model(type: User::class)
+    )]
+    #[OA\Parameter(
+        name: 'providerName',
+        description: 'Name of the provider to use',
+        in: 'path',
+        required: true,
+        allowEmptyValue: false,
+        schema: new OA\Schema(
+            type: 'string',
+            enum: ['facebook', 'twitter', 'google', 'outlook']
+        )
+    )]
     public function callback(string $providerName, Request $request): Response
     {
         $code = $request->query->get('code');
