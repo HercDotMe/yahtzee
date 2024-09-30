@@ -29,7 +29,14 @@ services:
             $clientSecret: '%env(string:FACEBOOK_APP_SECRET)%'
             $appURL: '%env(string:APP_URL)%'
 
+    App\Security\Service\Login\TwitterProvider:
+        arguments:
+            $clientId: '%env(string:TWITTER_APP_ID)%'
+            $clientSecret: '%env(string:TWITTER_APP_SECRET)%'
+            $appURL: '%env(string:APP_URL)%'
+
     App\Security\Controller\BridgeController:
         arguments:
             $loginProviders:
                 - '@App\Security\Service\Login\FacebookProvider'
+                - '@App\Security\Service\Login\TwitterProvider'

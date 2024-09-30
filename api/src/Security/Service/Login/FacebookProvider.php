@@ -9,11 +9,6 @@ use DateTime;
 
 class FacebookProvider extends AbstractProvider implements LoginProvider
 {
-    public function __construct(string $clientId, string $clientSecret, string $appURL)
-    {
-        parent::__construct($clientId, $clientSecret, $appURL);
-    }
-
     public function getProviderName(): string
     {
         return 'facebook';
