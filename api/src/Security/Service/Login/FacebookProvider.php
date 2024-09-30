@@ -17,7 +17,7 @@ class FacebookProvider extends AbstractProvider implements LoginProvider
     public function getRedirectUrl(): string {
         $params = [
             'client_id' => $this->clientId,
-            'redirect_uri' => $this->clientSecret,
+            'redirect_uri' => $this->redirectUri . $this->getProviderName(),
             'response_type' => 'code',
             'scope' => 'email'
         ];
