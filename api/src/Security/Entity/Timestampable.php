@@ -3,19 +3,18 @@
 namespace App\Security\Entity;
 
 use DateTime;
-use Doctrine\ORM\Mapping\Column;
-use Doctrine\ORM\Mapping\MappedSuperclass;
+use Doctrine\ORM\Mapping as ORM;
 use OpenApi\Attributes as OA;
 
-#[MappedSuperclass]
+#[ORM\MappedSuperclass]
 class Timestampable
 {
     #[OA\Property(type: 'string', readOnly: true)]
-    #[Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
+    #[ORM\Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected DateTime $createdAt;
 
     #[OA\Property(type: 'string', readOnly: true)]
-    #[Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
+    #[ORM\Column(type: 'datetime', nullable: false, options: ['default' => "CURRENT_TIMESTAMP"])]
     protected DateTime $updatedAt;
 
     public function getCreatedAt(): DateTime
