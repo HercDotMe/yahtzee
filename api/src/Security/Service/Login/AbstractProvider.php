@@ -6,10 +6,10 @@ abstract class AbstractProvider
 {
     protected readonly string $clientId;
     protected readonly string $clientSecret;
-    protected readonly string $redirectUri;
+    protected readonly string $appURL;
 
-    public function __construct(string $clientId, string $clientSecret, string $redirectUri) {
-        $this->redirectUri = $redirectUri;
+    public function __construct(string $clientId, string $clientSecret, string $appURL) {
+        $this->appURL = $appURL;
         $this->clientSecret = $clientSecret;
         $this->clientId = $clientId;
     }

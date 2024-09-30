@@ -27,7 +27,7 @@ services:
         arguments:
             $clientId: '%env(string:FACEBOOK_APP_ID)%'
             $clientSecret: '%env(string:FACEBOOK_APP_SECRET)%'
-            $redirectUri: '%env(string:LOGIN_REDIRECT_URI)%'
+            $appURL: '%env(string:APP_URL)%'
 
     App\Security\Controller\BridgeController:
         arguments:
