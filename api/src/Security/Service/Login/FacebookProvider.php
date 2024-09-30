@@ -19,7 +19,8 @@ class FacebookProvider extends AbstractProvider implements LoginProvider
         return 'facebook';
     }
 
-    public function getRedirectUrl(string $callbackURL): string {
+    public function getRedirectUrl(string $callbackURL): string
+    {
         $params = [
             'client_id' => $this->clientId,
             'redirect_uri' => $this->appURL . $callbackURL,
@@ -30,7 +31,8 @@ class FacebookProvider extends AbstractProvider implements LoginProvider
         return 'https://www.facebook.com/dialog/oauth?' . http_build_query($params);
     }
 
-    public function getAccessToken(string $code, string $callbackURL): AccessToken {
+    public function getAccessToken(string $code, string $callbackURL): AccessToken
+    {
         $params = [
             'client_id' => $this->clientId,
             'client_secret' => $this->clientSecret,

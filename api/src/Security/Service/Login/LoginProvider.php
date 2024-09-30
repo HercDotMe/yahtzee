@@ -7,7 +7,7 @@ use App\Security\DTO\OAuthUser;
 
 interface LoginProvider
 {
-    public function getProviderName() : string;
+    public function getProviderName(): string;
 
     public function getRedirectUrl(string $callbackURL): string;
 

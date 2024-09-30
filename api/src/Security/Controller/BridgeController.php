@@ -22,8 +22,7 @@ class BridgeController extends AbstractController
     public function __construct(array $loginProviders)
     {
         foreach ($loginProviders as $loginProvider) {
-            if ($loginProvider instanceof LoginProvider)
-            {
+            if ($loginProvider instanceof LoginProvider) {
                 $this->loginProviders[$loginProvider->getProviderName()] = $loginProvider;
             }
         }
