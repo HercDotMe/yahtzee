@@ -12,7 +12,7 @@ class User extends Timestampable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public string $id;
+    public int $id;
 
     #[OA\Property(type: 'string', readOnly: true)]
     #[ORM\Column(type: 'string', length: 255, unique: true, nullable: false)]

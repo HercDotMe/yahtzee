@@ -3,6 +3,7 @@
 namespace App\Security\Controller;
 
 use App\Security\Service\Login\LoginProvider;
+use App\Security\Service\UserManager;
 use OpenApi\Attributes\Tag;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -15,12 +16,19 @@ use Symfony\Component\Routing\Attribute\Route;
 class BridgeController extends AbstractController
 {
     /**
+     * @var UserManager
+     */
+    private UserManager $userManager;
+
+    /**
      * @var LoginProvider[]
      */
     private array $loginProviders;
 
-    public function __construct(array $loginProviders)
+    public function __construct(UserManager $userManager, array $loginProviders)
     {
+        $this->userManager = $userManager;
+
         foreach ($loginProviders as $loginProvider) {
             if ($loginProvider instanceof LoginProvider) {
                 $this->loginProviders[$loginProvider->getProviderName()] = $loginProvider;
@@ -48,6 +56,8 @@ class BridgeController extends AbstractController
             $callbackURL = $this->generateUrl('api_v1_security_callback', ['providerName' => $providerName]);
             $accessToken = $selectedProvider->getAccessToken($code, $callbackURL);
             $user = $selectedProvider->getUserDetails($accessToken);
+
+            $user = $this->userManager->updateUser($user);
 
             return new JsonResponse($user, Response::HTTP_OK);
         }

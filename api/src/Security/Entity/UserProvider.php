@@ -14,7 +14,7 @@ class UserProvider extends Timestampable
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
-    public string $id;
+    public int $id;
 
     #[ORM\ManyToOne(targetEntity: User::class)]
     public User $user;
