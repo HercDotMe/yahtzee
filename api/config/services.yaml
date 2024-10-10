@@ -11,32 +11,9 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
-    App\Security\:
-        resource: '../src/Security'
+    # Security Services
+    App\v1\Security\:
+        resource: '../src/v1/Security'
         exclude:
-            - '../src/Security/DependencyInjection/'
-            - '../src/Security/Entity/'
-            - '../src/Security/Kernel.php'
-
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
-
-    App\Security\Service\Login\FacebookProvider:
-        arguments:
-            $clientId: '%env(string:FACEBOOK_APP_ID)%'
-            $clientSecret: '%env(string:FACEBOOK_APP_SECRET)%'
-            $appURL: '%env(string:APP_URL)%'
-
-    App\Security\Service\Login\TwitterProvider:
-        arguments:
-            $clientId: '%env(string:TWITTER_APP_ID)%'
-            $clientSecret: '%env(string:TWITTER_APP_SECRET)%'
-            $appURL: '%env(string:APP_URL)%'
-
-    App\Security\Controller\BridgeController:
-        arguments:
-            $loginProviders:
-                - '@App\Security\Service\Login\FacebookProvider'
-                - '@App\Security\Service\Login\TwitterProvider'
+            - '../src/v1/Security/DependencyInjection/'
+            - '../src/v1/Security/Entity/'

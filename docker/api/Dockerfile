@@ -10,17 +10,16 @@ FROM vladerc/fpm-nginx:latest
 # Copy files
 COPY docker/api/nginx.conf /etc/nginx/sites-enabled/default
 COPY docker/api/entrypoint.sh /etc/entrypoint.sh
-COPY api /var/www/api
 
 # Install app dependencies
-WORKDIR /var/www/api
+WORKDIR /var/www/app
 
 # Expose required ports
 EXPOSE 80
 
 # Install app dependencies
-WORKDIR /var/www/api
-COPY --from=app_install /app /var/www/api
+WORKDIR /var/www/app
+COPY --from=app_install /app /var/www/app
 
 # Specify entrypoint
 ENTRYPOINT ["sh", "/etc/entrypoint.sh"]
