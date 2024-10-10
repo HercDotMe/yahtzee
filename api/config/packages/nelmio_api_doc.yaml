@@ -9,3 +9,18 @@ nelmio_api_doc:
                     title: Yahtzee Default API
                     description: An API that allows for Yahtzee games
                     version: 1.0.0
+
+    documentation:
+        servers:
+            - url: http://localhost:8080/
+              description: Development server
+            - url: https://yahtzee.herc.work/
+              description: Production server
+
+        components:
+            securitySchemes:
+                app-secret:
+                    type: apiKey
+                    in: header
+                    name: App-Secret
+                    description: "The authorized APP secret of your application"

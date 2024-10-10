@@ -12,8 +12,17 @@ services:
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
     # Security Services
-    App\v1\Security\:
-        resource: '../src/v1/Security'
+    App\:
+        resource: '../src/'
         exclude:
-            - '../src/v1/Security/DependencyInjection/'
-            - '../src/v1/Security/Entity/'
+            - '../src/DependencyInjection/'
+            - '../src/Entity/'
+            - '../src/Kernel.php'
+
+    App\EventListener\JSONResponseListener:
+        tags: [ kernel.event_listener ]
+
+    App\EventListener\SecureRequestListener:
+        tags: [ kernel.event_listener ]
+        arguments:
+            $secret: '%env(string:APP_SECRET)%'
